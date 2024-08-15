@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Page: React.FC = () => {
-  return <Wrapper>aaa</Wrapper>;
+  return <Wrapper>id create</Wrapper>;
 };
 
 const Wrapper = styled.div``;

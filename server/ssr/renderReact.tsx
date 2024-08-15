@@ -3,32 +3,40 @@ import { StaticRouter } from "react-router-dom/server";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 import { stream } from "../utils/stream.utils";
 
-import { getAllRoutes } from "../utils/routes.utils";
+import { getAllRoutes, getPaths } from "../utils/routes.utils";
 import config from "../../config.json";
 
 async function renderReact(
-    req: Req,
-    res: Res,
-    next: Next
+  req: Req,
+  res: Res,
+  next: Next
 ): Promise<Res | void> {
-    try {
-        const { default: App } = await import("../../src/App");
+  try {
+    const { default: App } = await import("../../src/App");
 
-        const routes = await getAllRoutes("src/pages");
+    const routes = await getAllRoutes("src/pages");
 
-        const styleSheet = new ServerStyleSheet();
-        global.window = {} as Window & typeof globalThis;
+    const styleSheet = new ServerStyleSheet();
+    global.window = {} as Window & typeof globalThis;
 
-        const jsx = (
-            <StyleSheetManager sheet={styleSheet.instance}>
-                <StaticRouter location={req.originalUrl}>
-                    <App routes={routes} />
-                </StaticRouter>
-            </StyleSheetManager>
-        );
+    console.log("Routes", getPaths(routes));
 
-        const appHtml = await stream(jsx);
-        const responseHtml = `<!DOCTYPE html>
+    const jsx = (
+      <StyleSheetManager sheet={styleSheet.instance}>
+        <StaticRouter location={req.originalUrl}>
+          <App routes={routes} />
+        </StaticRouter>
+      </StyleSheetManager>
+    );
+
+    const paths = [];
+    for (const route of routes) {
+      if (route.component) {
+      }
+    }
+
+    const appHtml = await stream(jsx);
+    const responseHtml = `<!DOCTYPE html>
       <html>
       <head>
         <meta charset="UTF-8">
@@ -43,11 +51,11 @@ async function renderReact(
       </body>
     </html>`;
 
-        styleSheet.seal();
-        return res.send(responseHtml);
-    } catch (err) {
-        return next(err);
-    }
+    styleSheet.seal();
+    return res.send(responseHtml);
+  } catch (err) {
+    return next(err);
+  }
 }
 
 export default renderReact;
