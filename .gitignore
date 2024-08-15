@@ -1,0 +1,9 @@
+dist
+build
+.tmp
+.DS_STORE
+.swc
+coverage
+*storybook.log
+node_modules
+package-lock.json
