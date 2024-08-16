@@ -3,6 +3,8 @@ import { StaticRouter } from "react-router-dom/server";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 import { stream } from "../utils/stream.utils";
 
+import pako from "pako";
+
 import { getAllRoutes, getPaths } from "../utils/routes.utils";
 import config from "../../config.json";
 
@@ -35,6 +37,9 @@ async function renderReact(
       }
     }
 
+    const input = new TextEncoder().encode(JSON.stringify(routes));
+    const compressed = pako.deflate(input);
+
     const appHtml = await stream(jsx);
     const responseHtml = `<!DOCTYPE html>
       <html>
@@ -42,7 +47,7 @@ async function renderReact(
         <meta charset="UTF-8">
         <title>${config.name}</title>
         <script>
-            window.INITIAL_PROPS = ${JSON.stringify(routes)};
+            window.INITIAL_PROPS = ${JSON.stringify(compressed)};
         </script>
         ${styleSheet.getStyleTags()}
       </head>
