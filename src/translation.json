@@ -1,0 +1,15 @@
+{
+  "default": "en",
+  "resources": {
+    "en": {
+      "welcome": "Hello",
+      "swedish": "Swedish",
+      "english": "English"
+    },
+    "sv": {
+      "welcome": "Hej!",
+      "swedish": "Svenska",
+      "english": "Engelska"
+    }
+  }
+}

@@ -21,8 +21,6 @@ async function renderReact(
     const styleSheet = new ServerStyleSheet();
     global.window = {} as Window & typeof globalThis;
 
-    console.log("Routes", getPaths(routes));
-
     const jsx = (
       <StyleSheetManager sheet={styleSheet.instance}>
         <StaticRouter location={req.originalUrl}>

@@ -43,8 +43,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, []);
 
-  console.log(resolvedTheme);
-
   return (
     <ThemeContext.Provider
       value={{ theme: resolvedTheme, colorMode, setColorMode }}

@@ -7,8 +7,8 @@ const app = express();
 const cwd = process.cwd();
 
 if (process.env.NODE_ENV === "development") {
-    app.use(devMiddleware);
-    app.use(hotMiddleware);
+  app.use(devMiddleware);
+  app.use(hotMiddleware);
 }
 
 app.use(express.static(path.resolve(cwd, "build/public"), { index: false }));

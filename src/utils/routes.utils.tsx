@@ -53,10 +53,7 @@ export const handleComponent = (
     }
     for (let i = layouts.length - 1; i >= 0; i--) {
       element = React.createElement(layouts[i], {}, element);
-      console.log("Layouts", i);
     }
-
-    console.log("Child count", route.children.length);
 
     return (
       <React.Fragment key={index}>

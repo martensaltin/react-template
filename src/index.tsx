@@ -14,8 +14,6 @@ if (root) {
   const outputString = new TextDecoder().decode(decompressed);
   const output = JSON.parse(outputString);
 
-  console.log("Output", output);
-
   hydrateRoot(
     root,
     <BrowserRouter>
